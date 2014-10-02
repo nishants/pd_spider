@@ -1,0 +1,32 @@
+
+1. Setup (4:30PM - )
+	install : 
+	homebrew
+	python(from homebrew)
+	django
+	pip
+	mysql
+
+2. create skeleton porject 
+create a django project - do a hello world
+add bootsrap
+add angularjs
+
+3. Add feture to add/view/update/ pages.
+
+4. extract actual data from the links.
+Add forms to submit links, 
+
+5. Migrate to mysql.
+
+6. deploy to heroku.
+
+submitPage(user, urlString) : return  created page, or error
+getPageInfo(user, pageId)   : return Page
+
+Page : {
+	title : 
+	meta: 
+		description: ""
+		keyword: ""
+}
