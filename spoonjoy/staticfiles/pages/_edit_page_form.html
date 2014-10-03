@@ -1,0 +1,34 @@
+<h3>Update page meta data</h3>
+<div class="container">
+<form id="edit-page-form" role="form" class="form-group">
+	<div class="form-group">
+	    <label for="link" >URL</label>
+		<input id="link" type="text" placeholder="Url" class="form-control" ng-model="page.url" ng-disabled='true'/>
+	</div>
+
+	<div class="form-group">
+	    <label for="title" >Title</label>
+		<input id="title" type="text" placeholder="Title" class="form-control" ng-model="page.title"/>
+	</div>
+
+	<div class="form-group">
+	    <label for="keyword" >Keyword</label>
+		<input id="keyword" type="text" placeholder="Keyword" class="form-control" ng-model="page.keyword"/>
+	</div>
+	
+	<div class="form-group">
+	    <label for="description" >Description</label>
+		<input id="description" type="text" placeholder="Description" class="form-control" ng-model="page.description"/>
+	</div>
+
+	<div class="form-group">
+		<button type="text" 				
+				class="btn btn-primary form-control" 
+				ng-click="updatePage()"> 
+				Save 
+		</button>
+	</div>
+
+</form>
+</div>
+</p>

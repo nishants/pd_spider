@@ -5,4 +5,5 @@ class PageMetaData(models.Model):
 	title = models.CharField(max_length=200)
 	description = models.CharField(max_length=200)
 	keyword = models.CharField(max_length=200)
+	url		= models.CharField(max_length=200)
 

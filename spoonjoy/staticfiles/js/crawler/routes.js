@@ -11,6 +11,14 @@
             controller: "SubmitUrlFormController"
           }
         }
+      }).state('edit-page', {
+        url: "/:id/edit",
+        views: {
+          default: {
+            templateUrl: "../public/pages/_edit_page_form.html",
+            controller: "EditFormController"
+          }
+        }
       })
     }
   ]);
