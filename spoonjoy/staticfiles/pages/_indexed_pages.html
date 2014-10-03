@@ -1,0 +1,22 @@
+<a ui-sref="submit-url"> Add New</a>
+
+<div class="table-container" >
+  <table id="pages-table" class="table-striped table table-bordered" >
+    <thead>
+      <tr>
+        <th colspan="2">URL</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Keyword</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="page in pages">
+      	<td colspan="2"><a href="#/{{page.id}}/edit">{{page.url}}</a></td>
+      	<td>{{page.title}}</td>
+      	<td>{{page.description}}</td>
+      	<td>{{page.keyword}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

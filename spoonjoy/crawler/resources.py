@@ -12,3 +12,15 @@ class PageMetaDataResource:
 
 	def asJson(self): 		
 		return PageMetaDataResource.JSON_TEMLPATE % (self.title, self.description, self.keyword, self.id, self.url)
+
+
+class PageMetaDataCollectionResource:
+	def __init__(self, pages):
+		resources = []
+		for page in pages : resources.append(PageMetaDataResource(page))
+		self.resources = resources
+
+	def asJson(self): 		
+		jsonStr = "["
+		for resource in self.resources : jsonStr+=resource.asJson() + " ,"
+		return jsonStr[0:-1] + "]"

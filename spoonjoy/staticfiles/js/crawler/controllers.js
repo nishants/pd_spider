@@ -1,14 +1,35 @@
 (function() {
 	'use strict';
 
+	crawler.app.controller('IndexedPagesController', function($scope, crawlerService, $location) {
+		$scope.pages  = [];
+		
+		var onSuccess = function(response){
+			$scope.pages = response;	
+		}
+
+		var onFailure = function(response){
+			console.error("Failed to fetch pages : ")
+		}
+
+	    var loadPages = function() {
+	        crawlerService.getPages().then(onSuccess, onFailure)
+	    };
+
+	    loadPages();
+	    $scope.redirectToListPages = function(){
+	    	$location.url("/indexedPages")
+	    }
+	});
+
 	crawler.app.controller('SubmitUrlFormController', function($scope, crawlerService, $location) {
 		$scope.linkToSubmit	= null;
-		var onSuccess = function(data){
-			var link = data.id+"/edit"
+		var onSuccess = function(response){
+			var link = response.data.id+"/edit"
         	$location.url(link)
 		}
 
-		var onFailure = function(data){
+		var onFailure = function(response){
 			console.error("Failed to submit link : " + $scope.linkToSubmit)
 		}
 
@@ -17,24 +38,24 @@
 	    };
 	});
 
-	crawler.app.controller('EditFormController', function($scope, crawlerService, $stateParams) {
+	crawler.app.controller('EditFormController', function($scope, crawlerService, $stateParams, $location) {
 		
 		var getPage =  function(){
-			var onGetPage = function(data){
-				$scope.page = data;
+			var onGetPage = function(response){
+				$scope.page = response.data;
 			}
 
-			var pageNotFound = function(data){
+			var pageNotFound = function(response){
 				console.error("No page found with id : " + $stateParams.id);
 			}
 
 			crawlerService.getPage($stateParams.id).then(onGetPage, pageNotFound)
 		}
 
-		var onSuccess = function(data){
-			console.log("updated page : "+ data.id);
+		var onSuccess = function(response){
+			$location.url('/indexedPages');
 		}
-		var onFailure = function(data){
+		var onFailure = function(response){
 			console.error("Failed to update page : ")
 		}
 

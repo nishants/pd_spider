@@ -18,7 +18,7 @@
 </head>
 
 <body ng-app="crawler-app">
-	<div id="main-container" class="container" ui-view="default">				 
+	<div id="main-container" class="container" ui-view="default" ng-controller="IndexedPagesController" ng-init="redirectToListPages()">				 
 		<a ui-sref="submit-url"> Submit Url</a>
 	</div>
 </body>

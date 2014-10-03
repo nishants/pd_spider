@@ -6,14 +6,17 @@
 
 	    return {
 	    	submitUrl: function(link){	   
-	    		var req = {link: link} 		
+	    		var req = {link: link} ;
 	    		return pages.post(req);
 	    	},
 	    	getPage: function(pageId){
-	    		return Restangular.one('crawler/pages', pageId).get(pageId)
+	    		return Restangular.one('crawler/pages', pageId).get(pageId);
 	    	},	    	
 	    	updatePage: function(params){
-	    		return Restangular.one('crawler/pages', params.id).put(params)
+	    		return Restangular.one('crawler/pages', params.id).customPUT(params);
+	    	},
+	    	getPages: function(){
+	    		return Restangular.all('crawler/pages').getList();
 	    	}
 
 	    };

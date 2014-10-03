@@ -3,7 +3,15 @@
   "use strict";
   crawler.app.config([
     '$stateProvider', function($stateProvider) {
-      return $stateProvider.state('submit-url', {
+      return $stateProvider.state('home', {
+        url: "/indexedPages",
+        views: {
+          default: {
+            templateUrl: "../public/pages/_indexed_pages.html",
+            controller: "IndexedPagesController"
+          }
+        }
+      }).state('submit-url', {
         url: "/submitUrl",
         views: {
           default: {

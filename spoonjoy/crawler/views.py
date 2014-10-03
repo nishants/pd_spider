@@ -4,7 +4,7 @@ from crawler.models import PageMetaData
 from django.http import HttpResponse
 from django.core import serializers
 from crawler.pageReader import PageReader
-from resources import PageMetaDataResource
+from resources import PageMetaDataResource, PageMetaDataCollectionResource
 
 import json
 
@@ -16,6 +16,15 @@ def index(request):
     return HttpResponse(template.render(context))
 
 @csrf_exempt
+def pages (request) : 
+	# import pdb; pdb.set_trace()
+	if(request.method == 'POST'):	
+		return create(request)
+	return allPages()
+
+def allPages():	
+	return HttpResponse(PageMetaDataCollectionResource(PageMetaData.objects.all()).asJson())
+
 def create(request):
 	pageMetaData = PageReader(urlFrom(request)).getMetaData()
 	pageMetaData.save()
@@ -40,7 +49,10 @@ def update(request, page_id):
 	return HttpResponse(asJson(page))
 
 def asJson(pageMetadata): 
-	return PageMetaDataResource(pageMetadata).asJson()
+	return _responseOf(PageMetaDataResource(pageMetadata).asJson())
+
+def _responseOf(jsonString) : 
+	return '{ "data" : ' + jsonString + " }"
 
 def urlFrom(request): 
 	return json.loads(request.body)['link']
