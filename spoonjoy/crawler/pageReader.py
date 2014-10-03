@@ -8,6 +8,6 @@ class PageReader:
 		return PageMetaData(
 			title="flipkart.com", 
 			description="A shopping website", 
-			keyword="shopping, online, india",
+			keywords="shopping, online, india",
 			url=self.pageUrl
 			)

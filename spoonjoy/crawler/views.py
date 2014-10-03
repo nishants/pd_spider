@@ -43,7 +43,7 @@ def update(request, page_id):
 	params = json.loads(request.body)
 	page = PageMetaData.objects.get(pk=page_id)
 	page.description = params['description']
-	page.keyword = params['keyword']
+	page.keywords = params['keywords']
 	page.title = params['title']
 	page.save()
 	return HttpResponse(asJson(page))
