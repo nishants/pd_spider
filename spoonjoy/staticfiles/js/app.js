@@ -5,7 +5,7 @@
 
   	crawler.app.config(
   		function (RestangularProvider) {
-    		RestangularProvider.setRequestSuffix('\\/');
+    		RestangularProvider.setRequestSuffix('/');
 		}
 	);
 

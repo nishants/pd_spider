@@ -4,7 +4,6 @@ from crawler.models import PageMetaData
 from django.http import HttpResponse
 from django.core import serializers
 from crawler.pageReader import PageReader
-from django.core import serializers
 
 import json
 
@@ -18,32 +17,20 @@ def index(request):
 
 @csrf_exempt
 def pages(request):
-	# if(request.method)
-    # print(request['REQUEST_METHOD'])
-    # return ""
     if request.method == 'POST' :
     	return create(request)
-    if request.method == 'GET' :
-    	return findOne(request)
 
 def create(request):
 	link = json.loads(request.body)['link']
-
 	pageMetaData = PageReader(link).getMetaData()
-	# import pdb; pdb.set_trace()
-
+	pageMetaData.save()
 	asJson = serializers.serialize("json", [pageMetaData])
 	return HttpResponse(asJson)
 
-def findOne(request):
-	return HttpResponse("findOne")
-# if request.method == 'GET':
-#     	return find(request)
-# 	elif request.method == 'POST':
-#     	return HttpResponse("create")
+def getPage(request, page_id):
+	page = PageMetaData.objects.get(pk=page_id)
+	return HttpResponse(asJson(page))
 
-# def create(request):
-# 	return HttpResponse("create")
+def asJson(obj): 
+	return serializers.serialize("json", [obj])	
 
-# def find(request):
-# 	return HttpResponse("find")

@@ -16,7 +16,7 @@ add angularjs
 
 4. extract actual data from the links.
 Add forms to submit links, 
-
+avoid duplicates.
 5. auto paste clipboard
 5. Migrate to mysql.
 
