@@ -31,7 +31,6 @@ def getPage(request, page_id):
 	return HttpResponse(asJson(PageMetaData.objects.get(pk=page_id)))
 
 def update(request, page_id):
-	# import pdb; pdb.set_trace()
 	params = json.loads(request.body)
 	page = PageMetaData.objects.get(pk=page_id)
 	page.description = params['description']

@@ -7,7 +7,7 @@
 	    return {
 	    	submitUrl: function(link){	   
 	    		var req = {link: link} 		
-	    		pages.post(req);
+	    		return pages.post(req);
 	    	}
 
 	    };
