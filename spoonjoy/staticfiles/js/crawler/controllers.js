@@ -1,10 +1,11 @@
 (function() {
 	'use strict';
 
-	crawler.app.controller('SubmitUrlFormController', ['$scope', function($scope) {	 
+	crawler.app.controller('SubmitUrlFormController', function($scope, crawlerService) {
+		$scope.linkToSubmit	= null;
 	    $scope.submitUrl = function() {
-	        alert("loaded");
+	        crawlerService.submitUrl($scope.linkToSubmit)
 	    };
-	}]);
+	});
 
 }).call(this);

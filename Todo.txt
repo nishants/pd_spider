@@ -17,6 +17,7 @@ add angularjs
 4. extract actual data from the links.
 Add forms to submit links, 
 
+5. auto paste clipboard
 5. Migrate to mysql.
 
 6. deploy to heroku.
