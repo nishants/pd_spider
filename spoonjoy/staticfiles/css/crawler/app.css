@@ -1,0 +1,8 @@
+@import url("_submit_link_form.css")
+
+.inlineFieldLabel{
+	width: 10%;
+}
+.inlineField{
+	width: 80%;
+}

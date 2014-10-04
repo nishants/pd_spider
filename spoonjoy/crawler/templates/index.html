@@ -2,9 +2,14 @@
 <html>
 <head>
 {% load staticfiles %}    
+<title>Crawler</title>
+<meta name="keywords" content="Python, Django, framework, open-source">
+<meta name="description" content="A sample django app.">
 
  <meta charset="utf-8">
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static "/public/css/crawler/app.css" %}" rel="stylesheet">
+
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/restangular/1.3.1/restangular.min.js">
     </script>
@@ -15,10 +20,16 @@
     <script src="{% static "/public/js/crawler/services.js" %}"></script>
     <script src="{% static "/public/js/crawler/controllers.js" %}"></script>
     <script src="{% static "/public/js/crawler/routes.js" %}"></script>
+    <script src="{% static "/public/js/crawler/back_button.js" %}"></script>
+    
 </head>
 
 <body ng-app="crawler-app">
-	<div id="main-container" class="container" ui-view="default" ng-controller="IndexedPagesController" ng-init="redirectToListPages()">				 
+	<div id="main-container" 
+        class="container" 
+        ui-view="default" 
+        ng-controller="IndexedPagesController"
+         ng-init="redirectToListPages()">				 
 		<a ui-sref="submit-url"> Submit Url</a>
 	</div>
 </body>

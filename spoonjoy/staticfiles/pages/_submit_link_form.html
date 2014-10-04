@@ -1,13 +1,27 @@
-<p>
-<form id="submit-url-form" role="form" class="form-group">
-	<div class="form-group">
-	    <label for="link" >Enter URL</label>
-		<input id="link" type="text" placeholder="Url" class="form-control" ng-model="linkToSubmit"/>
-		<button type="text" 				
-				class="btn btn-primary form-control" 
+<div class="container">
+	<h3>Add Page</h3>
+</div>
+
+<div class="container well" >
+<ng-form id="submit-url-form" class="text-center form-inline form">
+	<div class="row" >
+			<input id="link" 
+				type="text" 
+				placeholder="Page Address" 
+				ng-model="linkToSubmit"
+				class="wide"
+				ng-required=true
+				/>
+			<button type="text" 				
+				class="btn btn-primary" 
 				ng-click="submitUrl()"> 
 				Submit 
-		</button>
+			</button>
+			<button type="text" 				
+				class="btn" 
+				back-button> 
+				Cancel 
+			</button>
 	</div>
 </form>
-</p>
+</div>

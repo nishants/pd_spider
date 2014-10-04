@@ -1,7 +1,7 @@
 from django.core import serializers
 
 class PageMetaDataResource:
-	JSON_TEMLPATE = '{"title" : "%s", "description": "%s", "keywords": "%s", "id": "%s", "url": "%s" }'
+	JSON_TEMLPATE = u'{"title" : "%s", "description": "%s", "keywords": "%s", "id": "%s", "url": "%s" }'
 
 	def __init__(self, page):
 		self.keywords = page.keywords

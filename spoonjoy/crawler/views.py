@@ -17,7 +17,6 @@ def index(request):
 
 @csrf_exempt
 def pages (request) : 
-	# import pdb; pdb.set_trace()
 	if(request.method == 'POST'):	
 		return create(request)
 	return allPages()

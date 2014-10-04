@@ -1,6 +1,7 @@
 
 (function() {
   "use strict";
+  
   crawler.app.config([
     '$stateProvider', function($stateProvider) {
       return $stateProvider.state('home', {
