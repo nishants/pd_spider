@@ -3,8 +3,9 @@ from django.template import RequestContext, loader
 from crawler.models import PageMetaData
 from django.http import HttpResponse
 from django.core import serializers
-from crawler.pageReader import PageReader
+from spider import info_of
 from resources import PageMetaDataResource, PageMetaDataCollectionResource
+from collections import defaultdict
 
 import json
 
@@ -25,9 +26,19 @@ def allPages():
 	return HttpResponse(PageMetaDataCollectionResource(PageMetaData.objects.all()).asJson())
 
 def create(request):
-	pageMetaData = PageReader(urlFrom(request)).getMetaData()
+	pageMetaData = to_page_data(info_of(url_from(request)))
+	import pdb; pdb.set_trace()
 	pageMetaData.save()
 	return HttpResponse(asJson(pageMetaData))
+
+def to_page_data(values) : 	
+	values = defaultdict(lambda: None, values)
+	return PageMetaData(
+		title=values['title'],
+		description=values['description'],
+		keywords=values['keywords'],
+		url=values['url']
+	)
 
 @csrf_exempt
 def page(request, page_id): 
@@ -47,11 +58,11 @@ def update(request, page_id):
 	page.save()
 	return HttpResponse(asJson(page))
 
-def asJson(pageMetadata): 
-	return _responseOf(PageMetaDataResource(pageMetadata).asJson())
+def asJson(data): 
+	return _responseOf(PageMetaDataResource(data).asJson())
 
 def _responseOf(jsonString) : 
 	return '{ "data" : ' + jsonString + " }"
 
-def urlFrom(request): 
+def url_from(request): 
 	return json.loads(request.body)['link']
