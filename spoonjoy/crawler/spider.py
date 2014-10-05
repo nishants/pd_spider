@@ -8,7 +8,12 @@ def info_of(url) :
 	page = urllib2.urlopen(url)
 	page_info = Crawler().parse(page.read())
 	page_info["url"]  = url
-	return page_info
+	return to_all_keys_lower(page_info) 
+
+def to_all_keys_lower(info):
+	all_keys_lower = {}
+	for key in info : all_keys_lower[key.lower()] = info[key]
+	return all_keys_lower
 
 def action_for(tag): 
 	tag_actions = {
@@ -34,25 +39,22 @@ def getTitleInfo(data, attrs) :
 	return "title", data
 
 def getMetaTag(data, attrs):
-	return "keywords", "some-meta-value"
-
+	if('name' not in attrs or 'content' not in attrs ): return "",""
+	return attrs['name'], attrs['content'] 
 
 class Crawler(HTMLParser.HTMLParser):
 	def __init__(self):
 		HTMLParser.HTMLParser.__init__(self)
 		self.info = {}
 		self.last_data = None
-		print("creating new")
 
 	def handle_starttag(self, tag, attrs):
-		self.last_attrs = attrs
+		self.last_attrs = dict(attrs)
 
 	def handle_endtag(self, tag):
-		print "Encountered the end of a %s tag" % tag
 		self._process_tag(action_for(tag), self.last_data, self.last_attrs)
 
 	def handle_data(self, data):
-		print("Encountered data %s" % data)
 		self.last_data = data
 
 	def parse(self, htmlStr):

@@ -27,7 +27,6 @@ def allPages():
 
 def create(request):
 	pageMetaData = to_page_data(info_of(url_from(request)))
-	import pdb; pdb.set_trace()
 	pageMetaData.save()
 	return HttpResponse(asJson(pageMetaData))
 
