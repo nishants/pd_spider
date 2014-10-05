@@ -6,6 +6,7 @@ from django.core import serializers
 from spider import info_of
 from resources import PageMetaDataResource, PageMetaDataCollectionResource
 from collections import defaultdict
+import urllib2
 
 import json
 
@@ -26,7 +27,12 @@ def allPages():
 	return HttpResponse(PageMetaDataCollectionResource(PageMetaData.objects.all()).asJson())
 
 def create(request):
-	pageMetaData = to_page_data(info_of(url_from(request)))
+	pageMetaData = None
+	try : 
+		pageMetaData = to_page_data(info_of(url_from(request)))
+	except (urllib2.URLError, urllib2.HTTPError) as e:
+		return HttpResponse('{"error" : "%s"}' % e.reason)
+
 	pageMetaData.save()
 	return HttpResponse(asJson(pageMetaData))
 

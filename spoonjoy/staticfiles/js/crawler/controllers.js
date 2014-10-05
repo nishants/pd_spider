@@ -24,17 +24,19 @@
 
 	crawler.app.controller('SubmitUrlFormController', function($scope, crawlerService, $location) {
 		$scope.linkToSubmit	= null;
+		var handleError = function(error){
+			alert("Could not porcess url.\nReason : "+error)
+		}
 		var onSuccess = function(response){
+			if(response.error){
+				handleError(response.error);
+			}
 			var link = response.data.id+"/edit"
         	$location.url(link)
 		}
 
-		var onFailure = function(response){
-			console.error("Failed to submit link : " + $scope.linkToSubmit)
-		}
-
 	    $scope.submitUrl = function() {
-	        crawlerService.submitUrl($scope.linkToSubmit).then(onSuccess, onFailure)
+	        crawlerService.submitUrl($scope.linkToSubmit).then(onSuccess)
 	    };
 	});
 

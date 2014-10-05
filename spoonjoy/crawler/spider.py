@@ -8,7 +8,6 @@ def info_of(url) :
 	page = urllib2.urlopen(url)
 	page_info = Crawler().parse(page.read())
 	page_info["url"]  = url
-	import pdb; pdb.set_trace()
 	return to_all_keys_lower(page_info) 
 
 def to_all_keys_lower(info):
@@ -48,12 +47,16 @@ class Crawler(HTMLParser.HTMLParser):
 		HTMLParser.HTMLParser.__init__(self)
 		self.info = {}
 		self.last_data = None
+		self.flushed = True
 
 	def handle_starttag(self, tag, attrs):
+		self.flush()
+		self.flushed = False
 		self.last_attrs = dict(attrs)
+		self.last_tag = tag
 
-	def handle_endtag(self, tag):
-		self._process_tag(action_for(tag), self.last_data, self.last_attrs)
+	def handle_endtag(self, tag):		
+		self.flush()
 
 	def handle_data(self, data):
 		self.last_data = data
@@ -62,6 +65,8 @@ class Crawler(HTMLParser.HTMLParser):
 		self.feed(htmlStr)
 		return self.info
 
-	def _process_tag(self, action, data, attrs):
-		info_key, info_value = action(data, attrs)
+	def flush(self):
+		if self.flushed : return 
+		info_key, info_value = action_for(self.last_tag)(self.last_data, self.last_attrs)
 		self.info[info_key] = info_value
+		self.flushed = True

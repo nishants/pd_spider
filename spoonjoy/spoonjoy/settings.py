@@ -87,3 +87,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'public')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'staticfiles'),
 )
+
+# To support ascii data on web pages to process
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
