@@ -8,6 +8,7 @@ def info_of(url) :
 	page = urllib2.urlopen(url)
 	page_info = Crawler().parse(page.read())
 	page_info["url"]  = url
+	import pdb; pdb.set_trace()
 	return to_all_keys_lower(page_info) 
 
 def to_all_keys_lower(info):

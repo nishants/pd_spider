@@ -3,9 +3,10 @@
 </div>
 
 <div class="container well" >
-<ng-form id="submit-url-form" class="text-center form-inline form">
+<form name="submitUrlFrom" id="submit-url-form" class="text-center form-inline form">
 	<div class="row" >
-			<input id="link" 
+			<input id="link"
+				name="link" 
 				type="text" 
 				placeholder="Page Address" 
 				ng-model="linkToSubmit"
@@ -22,6 +23,8 @@
 				back-button> 
 				Cancel 
 			</button>
+			<label class="control-label" ng-show="submitUrlFrom.link.$error.invalid"> Hello I am a bad man</label>
+
 	</div>
 </form>
 </div>

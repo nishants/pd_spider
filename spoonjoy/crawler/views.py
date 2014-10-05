@@ -64,4 +64,6 @@ def _responseOf(jsonString) :
 	return '{ "data" : ' + jsonString + " }"
 
 def url_from(request): 
-	return json.loads(request.body)['link']
+	url =  json.loads(request.body)['link']
+	if not url.startswith("http://") : url = "http://" + url
+	return url
